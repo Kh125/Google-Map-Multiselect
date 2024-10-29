@@ -1,8 +1,24 @@
-# React + Vite
+# Multi-Select Map with Hover Information
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project implements a google map interface that allows users to select multiple areas and view detailed information on hover using the Google Maps API and the TerraMap API.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Multi-Select Functionality**: Users can select multiple areas on the map.
+- **Hover Information**: Displays information about the area when hovering over it.
+- **API Integration**: Utilizes the TerraMap API for area calculations and Google Maps for the map interface.
+
+## Technologies Used
+
+- React
+- Google Maps JavaScript API
+- TerraMap API for new overlay layer on the google map
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/your-repo.git
+   cd your-repo
+
+2. Add your environment varialble for google map api key.
