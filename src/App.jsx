@@ -39,7 +39,7 @@ const App = () => {
       if (!document.getElementById("map")) return;
 
       const mapInstance = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 35.749, lng: 139.587 },
+        center: { lat: 16.795, lng: 96.16 },
         zoom: 12,
       });
 
@@ -50,8 +50,10 @@ const App = () => {
       mapInstance.data.addListener("click", (event) => {
         const feature = event.feature;
         const fg = feature["Fg"];
-        const stateName = fg["points"].join(", ");
-        const stateId = fg["geocode"];
+        const stateName = `${fg["TS"]}, ${fg["ST_2"]}`;
+        const stateId = fg["OBJECTID"];
+
+        console.log("event", feature);
 
         setSelectedAreas((prev) => {
           if (prev.some((state) => state.id == stateId)) {
@@ -65,8 +67,8 @@ const App = () => {
       const handleMouseOver = (event) => {
         const feature = event.feature;
         const fg = feature["Fg"];
-        const stateName = fg["points"].join(", ");
-        const stateId = fg["geocode"];
+        const stateName = `${fg["TS"]}, ${fg["ST_2"]}`;
+        const stateId = fg["OBJECTID"];
 
         setHoveredArea({
           name: stateName,
@@ -104,12 +106,12 @@ const App = () => {
   useEffect(() => {
     if (map) {
       map.data.setStyle((feature) => {
-        const stateId = feature["Fg"]["geocode"];
+        const stateId = feature["Fg"]["OBJECTID"];
 
         const isSelected = selectedAreas.some((area) => area.id == stateId);
         return {
           fillColor: isSelected ? "orange" : "lightblue",
-          strokeColor: "cyan",
+          strokeColor: "magenta",
           strokeWeight: 1,
           fillOpacity: isSelected ? 0.5 : 0.2,
         };
@@ -147,20 +149,24 @@ const App = () => {
             top: 20,
             left: 80,
             backgroundColor: "white",
-            padding: "10px",
             borderRadius: "5px",
           }}
         >
-          <h3>Selected Areas</h3>
-          <ul>
+          <div className="bg-slate-400 border border-b-black">
+            <h3 className="p-4 font-bold">Selected Areas</h3>
+          </div>
+          <ol>
             {selectedAreas.map((state) => (
-              <div key={state.id}>
-                <p>{state.id}</p>
+              <li
+                key={state.id}
+                className="border border-b-stone-700 py-2 px-4"
+              >
+                {/* <p>{state.id}</p> */}
                 <p>{state.name}</p>
                 {/* // Display each selected Geocode ID and Name*/}
-              </div>
+              </li>
             ))}
-          </ul>
+          </ol>
         </div>
       )}
     </div>
